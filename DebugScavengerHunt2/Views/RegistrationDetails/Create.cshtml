@@ -1,0 +1,35 @@
+@model RegistrationDetail
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Add to Registration</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(model => model.Registration.RegistrationID)
+
+            <div class="form-group">
+                <label class="control-label">Courses:</label>
+                @Html.DropDownList("SelectedCourse", (SelectList)ViewBag.AllCourses, new { @class = "form-control" })
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="NumberOfStudents" class="control-label"></label>
+                <input asp-for="NumberOfStudents" class="form-control" />
+                <span asp-validation-for="NumberOfStudents" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Add to Registration" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-route-registrationID="@Model.Registration.RegistrationID">Back to List</a>
+</div>

@@ -1,0 +1,63 @@
+@model Course
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Course Details</h1>
+
+<div>
+    <h4>Course</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CourseName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CourseName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CourseFee)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CourseFee)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <h5>Departments for this Course</h5>
+    <table class="table table-bordered">
+        <tr>
+            <th>Department Title</th>
+        </tr>
+        @foreach (Department department in Model.Departments)
+        {
+            <tr>
+                <td>@department.DepartmentName</td>
+            </tr>
+        }
+    </table>
+}
+<div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("Customer"))
+        {
+            <a asp-action="AddToCart" asp-controller="Registrations" asp-route-courseID="@Model.CourseID">Edit</a>
+            <span>|</span>
+        }
+        if (User.IsInRole("Admin"))
+        {
+            <a asp-action="Edit" asp-route-id="@Model.CourseID">Edit</a>
+            <span>|</span>
+        }
+    }
+    <a asp-action="Index">Back to List</a>
+</div>

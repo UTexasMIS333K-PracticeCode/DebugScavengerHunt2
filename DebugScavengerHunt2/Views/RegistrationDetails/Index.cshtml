@@ -1,0 +1,49 @@
+@model IEnumerable<RegistrationDetail>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Course.CourseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfStudents)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalFees)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.CourseName)
+            </td> 
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfStudents)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalFees)
+            </td>
+            <td>
+                <a asp-action="Edit">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.RegistrationDetailID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

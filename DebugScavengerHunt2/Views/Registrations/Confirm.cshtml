@@ -1,0 +1,82 @@
+@model Registration
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Registration Details</h2>
+<h3>Are you sure you want to check out?</h3>
+<a asp-action="Confirm" asp-route-id="@Model.RegistrationID" class="btn btn-primary">Checkout</a>
+<a asp-action="Details" asp-route-id="@Model.RegistrationID" class="btn btn-primary">Cancel</a>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.FullName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.FullName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationNotes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationNotes)
+        </dd>
+    </dl>
+</div>
+<h5>Courses on this Registration</h5>
+<table class="table table-primary">
+    <tr>
+        <th>Course Title</th>
+        <th>Fee</th>
+        <th># of Students</th>
+        <th>Extended Price</th>
+    </tr>
+    @foreach (RegistrationDetail rd in Model.RegistrationDetails)
+    {
+        <tr>
+            <td>@Html.DisplayFor(ModelItem => rd.Course.CourseName)</td>
+            <td>@Html.DisplayFor(ModelItem => rd.CourseFee)</td>
+            <td>@Html.DisplayFor(ModelItem => rd.NumberOfStudents)</td>
+            <td>@Html.DisplayFor(ModelItem => rd.TotalFees)</td>
+        </tr>
+    }
+</table>
+
+<h5>Registration Summary</h5>
+<table class="table table-sm table-bordered" style="width:30%">
+    <tr>
+        <th colspan="2" style="text-align:center">Registration Summary</th>
+    </tr>
+    <tr>
+        <td>Registration Subtotal:</td>
+        <td>@Html.DisplayFor(model => model.RegistrationSubtotal)</td>
+    </tr>
+    <tr>
+        <td>Service Fee:</td>
+        <td>@Html.DisplayFor(model => model.ServiceFee)</td>
+    </tr>
+    <tr>
+        <td>Registration Total:</td>
+        <td>@Html.DisplayFor(model => model.RegistrationTotal)</td>
+    </tr>
+
+</table>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.RegistrationID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
