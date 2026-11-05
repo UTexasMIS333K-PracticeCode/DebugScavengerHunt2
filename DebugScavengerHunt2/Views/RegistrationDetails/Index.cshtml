@@ -44,6 +44,9 @@
                 <a asp-action="Delete" asp-route-id="@item.RegistrationDetailID">Delete</a>
             </td>
         </tr>
+        <div>
+            Hello, @item.Course.CourseName! You have @item.NumberOfStudents students registered, and the total fees are @item.TotalFees.
+        </div>
 }
     </tbody>
 </table>
